@@ -159,9 +159,9 @@ extension PartialSheet {
 
     /// This is the builder for the sheet content for iPad and Mac devices only
     private func iPadAndMacSheet() -> some View {
-        VStack {
+//        VStack {
             self.manager.content
-        }.background(self.background)
+//        }.background(self.background)
     }
 
     //MARK: - iPhone Sheet Builder
