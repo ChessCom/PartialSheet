@@ -160,19 +160,7 @@ extension PartialSheet {
     /// This is the builder for the sheet content for iPad and Mac devices only
     private func iPadAndMacSheet() -> some View {
         VStack {
-            HStack {
-                Spacer()
-                Button(action: {
-                    self.manager.isPresented = false
-                }, label: {
-                    Image(systemName: "xmark")
-                        .foregroundColor(style.iPadCloseButtonColor)
-                        .padding(.horizontal)
-                        .padding(.top)
-                })
-            }
             self.manager.content
-            Spacer()
         }.background(self.background)
     }
 
