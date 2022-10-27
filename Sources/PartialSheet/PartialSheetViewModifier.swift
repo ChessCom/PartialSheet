@@ -135,11 +135,17 @@ struct PartialSheet: ViewModifier {
                 // display the sheet content as a normal sheet
                 .iPadOrMac {
                     $0
-                        .sheet(isPresented: $manager.isPresented, onDismiss: {
-                            self.manager.onDismiss?()
-                        }, content: {
+                        .popover(isPresented: $manager.isPresented) {
                             self.iPadAndMacSheet()
-                        })
+                        }
+                        .onDisappear {
+                            self.$manager.onDismiss?()
+                        }
+//                        .sheet(isPresented: $manager.isPresented, onDismiss: {
+//                            self.manager.onDismiss?()
+//                        }, content: {
+//                            self.iPadAndMacSheet()
+//                        })
             }
             // if the device type is an iPhone,
             // display the sheet content as a draggableSheet
