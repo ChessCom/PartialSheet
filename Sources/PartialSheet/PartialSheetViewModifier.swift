@@ -135,42 +135,11 @@ struct PartialSheet: ViewModifier {
             // display the sheet content as a normal sheet
                 .iPadOrMac {
                     $0
-                        .background(
-                            GeometryReader { proxy in
-                                // Add a tracking on the presenter frame
-                                Color.clear.preference(
-                                    key: PresenterPreferenceKey.self,
-                                    value: [PreferenceData(bounds: proxy.frame(in: .global))]
-                                )
-                            }
-                        )
-                        .onAppear{
-                            let notifier = NotificationCenter.default
-                            let willShow = UIResponder.keyboardWillShowNotification
-                            let willHide = UIResponder.keyboardWillHideNotification
-                            notifier.addObserver(forName: willShow,
-                                                 object: nil,
-                                                 queue: .main,
-                                                 using: self.keyboardShow)
-                            notifier.addObserver(forName: willHide,
-                                                 object: nil,
-                                                 queue: .main,
-                                                 using: self.keyboardHide)
-                        }
-                        .onDisappear {
-                            let notifier = NotificationCenter.default
-                            notifier.removeObserver(self)
-                        }
-                        .onPreferenceChange(PresenterPreferenceKey.self, perform: { (prefData) in
-                            DispatchQueue.main.async {
-                                self.presenterContentRect = prefData.first?.bounds ?? .zero
-                            }
+                        .sheet(isPresented: $manager.isPresented, onDismiss: {
+                            self.manager.onDismiss?()
+                        }, content: {
+                            self.iPadAndMacSheet()
                         })
-//                        .sheet(isPresented: $manager.isPresented, onDismiss: {
-//                            self.manager.onDismiss?()
-//                        }, content: {
-//                            self.iPadAndMacSheet()
-//                        })
                 }
             // if the device type is an iPhone,
             // display the sheet content as a draggableSheet
@@ -190,9 +159,12 @@ extension PartialSheet {
 
     /// This is the builder for the sheet content for iPad and Mac devices only
     private func iPadAndMacSheet() -> some View {
-        //        VStack {
-        self.manager.content
-        //        }.background(self.background)
+        VStack {
+            self.manager.content
+
+            Spacer()
+        }
+        .background(self.background)
     }
 
     //MARK: - iPhone Sheet Builder
