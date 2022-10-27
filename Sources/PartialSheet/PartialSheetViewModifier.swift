@@ -39,11 +39,11 @@ struct PartialSheet: ViewModifier {
         let topSafeArea = (UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0)
         
         let calculatedTop =
-            presenterContentRect.height +
-            topSafeArea -
-            sheetContentRect.height -
-            handlerSectionHeight
-          
+        presenterContentRect.height +
+        topSafeArea -
+        sheetContentRect.height -
+        handlerSectionHeight
+
         guard calculatedTop < style.minTopDistance else {
             return calculatedTop
         }
@@ -84,10 +84,10 @@ struct PartialSheet: ViewModifier {
     /// Background of sheet
     private var background: AnyView {
         switch self.style.background {
-        case .solid(let color):
-            return AnyView(color)
-        case .blur(let effect):
-            return AnyView(BlurEffectView(style: effect).background(Color.clear))
+            case .solid(let color):
+                return AnyView(color)
+            case .blur(let effect):
+                return AnyView(BlurEffectView(style: effect).background(Color.clear))
         }
     }
     
@@ -96,7 +96,7 @@ struct PartialSheet: ViewModifier {
     func body(content: Content) -> some View {
         ZStack {
             content
-                // if the device type is an iPhone
+            // if the device type is an iPhone
                 .iPhone {
                     $0
                         .background(
@@ -107,7 +107,7 @@ struct PartialSheet: ViewModifier {
                                     value: [PreferenceData(bounds: proxy.frame(in: .global))]
                                 )
                             }
-                    )
+                        )
                         .onAppear{
                             let notifier = NotificationCenter.default
                             let willShow = UIResponder.keyboardWillShowNotification
@@ -120,33 +120,60 @@ struct PartialSheet: ViewModifier {
                                                  object: nil,
                                                  queue: .main,
                                                  using: self.keyboardHide)
-                    }
-                    .onDisappear {
-                        let notifier = NotificationCenter.default
-                        notifier.removeObserver(self)
-                    }
-                    .onPreferenceChange(PresenterPreferenceKey.self, perform: { (prefData) in
-                        DispatchQueue.main.async {
-                            self.presenterContentRect = prefData.first?.bounds ?? .zero
-                        }
-                    })
-            }
-                // if the device type is not an iPhone,
-                // display the sheet content as a normal sheet
-                .iPadOrMac {
-                    $0
-                        .popover(isPresented: $manager.isPresented) {
-                            self.iPadAndMacSheet()
                         }
                         .onDisappear {
-                            self.manager.onDismiss?()
+                            let notifier = NotificationCenter.default
+                            notifier.removeObserver(self)
                         }
+                        .onPreferenceChange(PresenterPreferenceKey.self, perform: { (prefData) in
+                            DispatchQueue.main.async {
+                                self.presenterContentRect = prefData.first?.bounds ?? .zero
+                            }
+                        })
+                }
+            // if the device type is not an iPhone,
+            // display the sheet content as a normal sheet
+                .iPadOrMac {
+                    $0
+                        .background(
+                            GeometryReader { proxy in
+                                // Add a tracking on the presenter frame
+                                Color.clear.preference(
+                                    key: PresenterPreferenceKey.self,
+                                    value: [PreferenceData(bounds: proxy.frame(in: .global))]
+                                )
+                            }
+                        )
+                        .onAppear{
+                            let notifier = NotificationCenter.default
+                            let willShow = UIResponder.keyboardWillShowNotification
+                            let willHide = UIResponder.keyboardWillHideNotification
+                            notifier.addObserver(forName: willShow,
+                                                 object: nil,
+                                                 queue: .main,
+                                                 using: self.keyboardShow)
+                            notifier.addObserver(forName: willHide,
+                                                 object: nil,
+                                                 queue: .main,
+                                                 using: self.keyboardHide)
+                        }
+                        .onDisappear {
+                            let notifier = NotificationCenter.default
+                            notifier.removeObserver(self)
+                        }
+                        .onPreferenceChange(PresenterPreferenceKey.self, perform: { (prefData) in
+                            DispatchQueue.main.async {
+                                self.presenterContentRect = prefData.first?.bounds ?? .zero
+                            }
+                        })
+
+//                    $0
 //                        .sheet(isPresented: $manager.isPresented, onDismiss: {
 //                            self.manager.onDismiss?()
 //                        }, content: {
 //                            self.iPadAndMacSheet()
 //                        })
-            }
+                }
             // if the device type is an iPhone,
             // display the sheet content as a draggableSheet
             if deviceType == .iphone {
@@ -165,9 +192,9 @@ extension PartialSheet {
 
     /// This is the builder for the sheet content for iPad and Mac devices only
     private func iPadAndMacSheet() -> some View {
-//        VStack {
-            self.manager.content
-//        }.background(self.background)
+        //        VStack {
+        self.manager.content
+        //        }.background(self.background)
     }
 
     //MARK: - iPhone Sheet Builder
@@ -204,16 +231,16 @@ extension PartialSheet {
             Group {
                 VStack(spacing: 0) {
                     switch style.handlerBarStyle {
-                    case .solid(let handlerBarColor): // This is the little rounded bar (HANDLER) on top of the sheet
-                        VStack {
-                            Spacer()
-                            RoundedRectangle(cornerRadius: CGFloat(5.0) / 2.0)
-                                .frame(width: 40, height: 5)
-                                .foregroundColor(handlerBarColor)
-                            Spacer()
-                        }
-                        .frame(height: handlerSectionHeight)
-                    case .none: EmptyView()
+                        case .solid(let handlerBarColor): // This is the little rounded bar (HANDLER) on top of the sheet
+                            VStack {
+                                Spacer()
+                                RoundedRectangle(cornerRadius: CGFloat(5.0) / 2.0)
+                                    .frame(width: 40, height: 5)
+                                    .foregroundColor(handlerBarColor)
+                                Spacer()
+                            }
+                            .frame(height: handlerSectionHeight)
+                        case .none: EmptyView()
                     }
                     
                     VStack {
@@ -223,7 +250,7 @@ extension PartialSheet {
                                 GeometryReader { proxy in
                                     Color.clear.preference(key: SheetPreferenceKey.self, value: [PreferenceData(bounds: proxy.frame(in: .global))])
                                 }
-                        )
+                            )
                     }
                     Spacer()
                 }
