@@ -139,7 +139,7 @@ struct PartialSheet: ViewModifier {
                             self.iPadAndMacSheet()
                         }
                         .onDisappear {
-                            self.$manager.onDismiss?()
+                            self.manager.onDismiss?()
                         }
 //                        .sheet(isPresented: $manager.isPresented, onDismiss: {
 //                            self.manager.onDismiss?()
