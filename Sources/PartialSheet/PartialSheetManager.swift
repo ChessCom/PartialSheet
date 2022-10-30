@@ -27,9 +27,9 @@ public class PartialSheetManager: ObservableObject {
     @Published var isPresented: Bool = false {
         didSet {
             if !isPresented {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) { [weak self] in
-//                    self?.content = AnyView(EmptyView())
-//                    self?.onDismiss = nil
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [weak self] in
+                    self?.content = AnyView(EmptyView())
+                    self?.onDismiss = nil
                 }
             }
         }
@@ -47,7 +47,7 @@ public class PartialSheetManager: ObservableObject {
     }
 
     /**
-      Presents a **Partial Sheet**  with a dynamic height based on his content.
+     Presents a **Partial Sheet**  with a dynamic height based on his content.
      - parameter content: The content to place inside of the Partial Sheet.
      - parameter onDismiss: This code will be runned when the sheet is dismissed.
      */
@@ -77,10 +77,10 @@ public class PartialSheetManager: ObservableObject {
 
     /**
      Updates some properties of the **Partial Sheet**
-    - parameter isPresented: If the partial sheet is presented
-    - parameter content: The content to place inside of the Partial Sheet.
-    - parameter onDismiss: This code will be runned when the sheet is dismissed.
-    */
+     - parameter isPresented: If the partial sheet is presented
+     - parameter content: The content to place inside of the Partial Sheet.
+     - parameter onDismiss: This code will be runned when the sheet is dismissed.
+     */
     public func updatePartialSheet<T>(isPresented: Bool? = nil, content: (() -> T)? = nil, onDismiss: (() -> Void)? = nil) where T: View {
         if let content = content {
             self.content = AnyView(content())
