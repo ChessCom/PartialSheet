@@ -179,6 +179,7 @@ extension PartialSheet {
                     }
                 }
                 .edgesIgnoringSafeArea(.vertical)
+                .edgesIgnoringSafeArea(.horizontal)
                 .onTapGesture { dismissSheet() }
             }
             
@@ -240,7 +241,6 @@ extension PartialSheet {
                         self.sheetContentRect = sheetContentRect
                     }
                 }
-                .frame(width: UIScreen.main.bounds.width)
                 .background(self.background)
                 .cornerRadius(iPhoneStyle.cornerRadius)
                 .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.13), radius: 10.0)
