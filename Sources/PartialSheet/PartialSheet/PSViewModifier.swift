@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 /// This is the modifier for the Partial Sheet
-struct PartialSheet: ViewModifier {
+public struct PartialSheet: ViewModifier {
     
     // MARK: - Private Properties
     
@@ -87,7 +87,7 @@ struct PartialSheet: ViewModifier {
     
     // MARK: - Content Builders
     
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         ZStack {
             content
             // if the device type is an iPhone
