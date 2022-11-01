@@ -8,8 +8,8 @@
 import SwiftUI
 
 public struct PSSlideAnimation {
-    var slideIn: Animation
-    var slideOut: Animation
+    public var slideIn: Animation
+    public var slideOut: Animation
 
     /// The default slide in/out animation of the partial sheet
     private(set) var defaultSlideAnimation: Animation = {
