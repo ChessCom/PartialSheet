@@ -20,7 +20,7 @@ public struct PSManagerWrapper<Parent: View, SheetContent: View>: View {
     let content: () -> SheetContent
     let parent: Parent
     
-    var body: some View {
+    public var body: some View {
         parent
             .onChange(of: isPresented, perform: {_ in updateContent() })
     }
