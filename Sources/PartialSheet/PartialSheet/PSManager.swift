@@ -42,7 +42,7 @@ class PSManager: ObservableObject {
     var slideAnimation: PSSlideAnimation
 
     
-    init() {
+    public init() {
         content = EmptyView().eraseToAnyView()
         slideAnimation = PSSlideAnimation()
     }
