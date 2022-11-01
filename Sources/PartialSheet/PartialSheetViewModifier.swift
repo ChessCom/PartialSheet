@@ -145,7 +145,7 @@ struct PartialSheet: ViewModifier {
             // display the sheet content as a draggableSheet
             if deviceType == .iphone {
                 iPhoneSheet()
-//                    .edgesIgnoringSafeArea(.vertical)
+                    .edgesIgnoringSafeArea(.vertical)
             }
         }
     }
@@ -188,7 +188,7 @@ extension PartialSheet {
                         BlurEffectView(style: style.blurEffectStyle ?? UIBlurEffect.Style.systemChromeMaterial)
                     }
                 }
-//                .edgesIgnoringSafeArea(.vertical)
+                .edgesIgnoringSafeArea(.vertical)
                 .onTapGesture {
                     withAnimation(manager.defaultAnimation) {
                         self.manager.isPresented = false
