@@ -23,7 +23,7 @@ struct ContentView: View {
                             .font(.footnote)
                             .padding()
                     }
-                    Section("Examples") {
+                    Section {
                         NavigationLink(
                             destination: BasicExample(),
                             label: {Text("Basic Example")

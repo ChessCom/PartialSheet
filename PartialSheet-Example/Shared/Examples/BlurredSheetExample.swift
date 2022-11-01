@@ -12,8 +12,8 @@ import PartialSheet
 struct BlurredExample: View {
     @State var isSheetPresented = false
     let iPhoneStyle = PSIphoneStyle(
-        background: .blur(.ultraThin),
-        handleBarStyle: .solid(.secondary),
+        background: .solid(.white),
+        handleBarStyle: .none,
         cover: .enabled(Color.black.opacity(0.4)),
         cornerRadius: 10
     )

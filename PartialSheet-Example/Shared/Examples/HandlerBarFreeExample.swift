@@ -12,7 +12,7 @@ import PartialSheet
 struct HandleBarFreeExample: View {
     @State private var isSheetPresented = false
     let iPhoneStyle = PSIphoneStyle(
-        background: .solid(Color(uiColor: .systemBackground)),
+        background: .solid(Color(UIColor.systemBackground)),
         handleBarStyle: .none,
         cover: .enabled(Color.black.opacity(0.4)),
         cornerRadius: 10
