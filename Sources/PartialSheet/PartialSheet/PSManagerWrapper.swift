@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 /// A wrapper between the PartialSheetManager and the View
-struct PSManagerWrapper<Parent: View, SheetContent: View>: View {
+public struct PSManagerWrapper<Parent: View, SheetContent: View>: View {
     @EnvironmentObject var partialSheetManager: PSManager
     
     @Binding var isPresented: Bool
