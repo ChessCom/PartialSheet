@@ -19,14 +19,7 @@ import SwiftUI
 class PSManager: ObservableObject {
     
     /// Published var to present or hide the partial sheet
-    @Published var isPresented: Bool = false {
-        didSet {
-            if !isPresented {
-                content = EmptyView().eraseToAnyView()
-                onDismiss = nil
-            }
-        }
-    }
+    @Published var isPresented: Bool = false
 
     /// The content of the sheet
     @Published private(set) var content: AnyView
