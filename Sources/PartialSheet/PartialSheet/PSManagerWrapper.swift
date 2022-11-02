@@ -33,7 +33,7 @@ public struct PSManagerWrapper<Parent: View, SheetContent: View>: View {
             iPadMacStyle: iPadMacStyle,
             slideAnimation: slideAnimation,
             content: content,
-            onDismiss: { self.isPresented = false}
+            onDismiss: { self.isPresented = false }
         )
     }
     
