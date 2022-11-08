@@ -13,7 +13,7 @@ public struct PSSlideAnimation {
 
     /// The default slide in/out animation of the partial sheet
     private(set) var defaultSlideAnimation: Animation = {
-        .easeInOut
+        .easeInOut(duration: 0.35)
 //        .interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0)
     }()
 
