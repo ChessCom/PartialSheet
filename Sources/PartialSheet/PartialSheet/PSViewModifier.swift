@@ -117,6 +117,7 @@ public struct PartialSheet: ViewModifier {
                             self.iPadAndMacSheet()
                                 .fixedSize()
                         })
+                        .preferredColorScheme(.dark)
                 }
             // if the device type is an iPhone,
             // display the sheet content as a draggableSheet
