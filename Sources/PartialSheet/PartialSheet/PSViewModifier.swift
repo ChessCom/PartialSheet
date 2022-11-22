@@ -116,8 +116,8 @@ public struct PartialSheet: ViewModifier {
                         }, content: {
                             self.iPadAndMacSheet()
                                 .fixedSize()
+                                .preferredColorScheme(.dark)
                         })
-                        .preferredColorScheme(.dark)
                 }
             // if the device type is an iPhone,
             // display the sheet content as a draggableSheet
@@ -152,7 +152,8 @@ extension PartialSheet {
                 EmptyView()
             }
             self.manager.content
-        }.background(self.background)
+        }
+        .background(self.background)
     }
     
     //MARK: - iPhone Sheet Builder
@@ -286,6 +287,8 @@ class FormSheetWrapper<Content: View>: UIViewController, UIPopoverPresentationCo
 
         vc.modalPresentationStyle = .formSheet
         vc.presentationController?.delegate = self
+
+        vc.overrideUserInterfaceStyle = .dark
         hostVC = vc
         self.present(vc, animated: true, completion: nil)
     }
