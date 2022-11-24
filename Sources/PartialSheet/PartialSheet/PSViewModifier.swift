@@ -291,8 +291,6 @@ class FormSheetWrapper<Content: View>: UIViewController, UIPopoverPresentationCo
         vc.overrideUserInterfaceStyle = .dark
         hostVC = vc
         self.present(vc, animated: true, completion: nil)
-
-        vc.view.invalidateIntrinsicContentSize()
     }
 
     func hide() {
