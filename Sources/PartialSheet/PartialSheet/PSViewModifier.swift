@@ -306,7 +306,7 @@ class FormSheetWrapper<Content: View>: UIViewController, UIPopoverPresentationCo
     }
 
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.formSheet
+        return UIModalPresentationStyle.none
     }
 }
 
