@@ -315,7 +315,7 @@ class SizingHostingController<Content>: UIHostingController<Content> where Conte
         super.viewWillAppear(animated)
 
         view.sizeToFit()
-        preferredContentSize = vc.view.bounds.size
+        preferredContentSize = view.bounds.size
 //        preferredContentSize = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
 }
