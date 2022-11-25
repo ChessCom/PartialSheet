@@ -283,7 +283,7 @@ class FormSheetWrapper<Content: View>: UIViewController, UIPopoverPresentationCo
 
         vc.view.sizeToFit()
         vc.preferredContentSize = vc.view.bounds.size
-        vc.preferredContentSize = vc.view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+//        vc.preferredContentSize = vc.view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
 
         vc.modalPresentationStyle = .formSheet
         vc.presentationController?.delegate = self
