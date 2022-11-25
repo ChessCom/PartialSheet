@@ -281,7 +281,6 @@ class FormSheetWrapper<Content: View>: UIViewController, UIPopoverPresentationCo
         guard hostVC == nil else { return }
         let vc = UIHostingController(rootView: content())
 
-        vc.view.translatesAutoresizingMaskIntoConstraints = false
         vc.view.sizeToFit()
 //        vc.view.backgroundColor = .clear
         vc.preferredContentSize = vc.view.bounds.size
@@ -304,6 +303,10 @@ class FormSheetWrapper<Content: View>: UIViewController, UIPopoverPresentationCo
     func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
         hostVC = nil
         self.onDismiss?()
+    }
+
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.formSheet
     }
 }
 
