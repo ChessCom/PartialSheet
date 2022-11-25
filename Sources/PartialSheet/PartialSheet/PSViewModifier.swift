@@ -279,7 +279,7 @@ class FormSheetWrapper<Content: View>: UIViewController, UIPopoverPresentationCo
 
     func show() {
         guard hostVC == nil else { return }
-        let vc = UIHostingController(rootView: content())
+        let vc = SizingHostingController(rootView: content())
 
         vc.view.sizeToFit()
 //        vc.view.backgroundColor = .clear
@@ -307,6 +307,15 @@ class FormSheetWrapper<Content: View>: UIViewController, UIPopoverPresentationCo
 
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
+    }
+}
+
+class SizingHostingController<Content>: UIHostingController<Content> where Content: View {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        view.sizeToFit()
+        preferredContentSize = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
 }
 
