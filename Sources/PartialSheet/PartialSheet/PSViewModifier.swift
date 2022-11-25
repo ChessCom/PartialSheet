@@ -282,7 +282,8 @@ class FormSheetWrapper<Content: View>: UIViewController, UIPopoverPresentationCo
         let vc = UIHostingController(rootView: content())
 
         vc.view.sizeToFit()
-        vc.view.backgroundColor = .clear
+        vc.view.invalidateIntrinsicContentSize()
+//        vc.view.backgroundColor = .clear
         vc.preferredContentSize = vc.view.bounds.size
         vc.preferredContentSize = vc.view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
 
