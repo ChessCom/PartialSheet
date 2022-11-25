@@ -281,20 +281,18 @@ class FormSheetWrapper<Content: View>: UIViewController, UIPopoverPresentationCo
         guard hostVC == nil else { return }
         let vc = UIHostingController(rootView: content())
 
+        vc.view.translatesAutoresizingMaskIntoConstraints = false
         vc.view.sizeToFit()
 //        vc.view.backgroundColor = .clear
         vc.preferredContentSize = vc.view.bounds.size
         vc.preferredContentSize = vc.view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
 
-        vc.modalPresentationStyle = .pageSheet
+        vc.modalPresentationStyle = .formSheet
         vc.presentationController?.delegate = self
 
         vc.overrideUserInterfaceStyle = .dark
         hostVC = vc
-        self.present(vc, animated: true) {
-            vc.view.sizeToFit()
-//            vc.view.invalidateIntrinsicContentSize()
-        }
+        self.present(vc, animated: true, completion: nil)
     }
 
     func hide() {
