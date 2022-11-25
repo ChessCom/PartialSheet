@@ -314,7 +314,7 @@ class SizingHostingController<Content>: UIHostingController<Content> where Conte
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        view.sizeToFit()
+//        view.sizeToFit()
         preferredContentSize = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
 }
