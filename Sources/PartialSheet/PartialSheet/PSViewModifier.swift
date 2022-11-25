@@ -311,12 +311,12 @@ class FormSheetWrapper<Content: View>: UIViewController, UIPopoverPresentationCo
 }
 
 class SizingHostingController<Content>: UIHostingController<Content> where Content: View {
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
 
         view.sizeToFit()
         preferredContentSize = view.bounds.size
-//        preferredContentSize = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        preferredContentSize = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
 }
 
