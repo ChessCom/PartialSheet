@@ -282,7 +282,6 @@ class FormSheetWrapper<Content: View>: UIViewController, UIPopoverPresentationCo
         let vc = SizingHostingController(rootView: content())
 
         vc.view.sizeToFit()
-//        vc.view.backgroundColor = .clear
         vc.preferredContentSize = vc.view.bounds.size
         vc.preferredContentSize = vc.view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
 
@@ -328,7 +327,6 @@ struct FormSheet<Content: View>: UIViewControllerRepresentable {
     let content: () -> Content
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<FormSheet<Content>>) -> FormSheetWrapper<Content> {
-
         let vc = FormSheetWrapper(content: content)
         vc.onDismiss = {
             self.show = false
