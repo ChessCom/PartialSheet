@@ -49,7 +49,7 @@ public struct PartialSheet: ViewModifier {
     /// The height of the handle bar section
     var handleSectionHeight: CGFloat {
         switch iPhoneStyle.handleBarStyle {
-        case .solid: return 40
+        case .solid: return 0
         case .none: return 0
         }
     }
@@ -189,19 +189,18 @@ extension PartialSheet {
             // The SHEET VIEW
             Group {
                 VStack(spacing: 0) {
-                    switch iPhoneStyle.handleBarStyle {
-                    case .solid(let handleBarColor):
-                        VStack {
-                            Spacer()
-                            RoundedRectangle(cornerRadius: CGFloat(5.0) / 2.0)
-                                .frame(width: 40, height: 5)
-                                .foregroundColor(handleBarColor)
-                            Spacer()
-                        }
-                        .frame(height: handleSectionHeight)
-                    case .none: EmptyView()
-                    }
-
+//                    switch iPhoneStyle.handleBarStyle {
+//                    case .solid(let handleBarColor):
+//                        VStack {
+//                            Spacer()
+//                            RoundedRectangle(cornerRadius: CGFloat(5.0) / 2.0)
+//                                .frame(width: 40, height: 5)
+//                                .foregroundColor(handleBarColor)
+//                            Spacer()
+//                        }
+//                        .frame(height: handleSectionHeight)
+//                    case .none: EmptyView()
+//                    }
                     if case let PSType.scrollView(height, showsIndicators) = manager.type {
                         VStack {
                             PSScrollVIew(
